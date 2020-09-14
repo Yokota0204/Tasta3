@@ -1,0 +1,9 @@
+= javascript_pack_tag 'vue_test'
+div#app
+  span title:
+  span v-text="title"
+  p status:
+  span v-text="status"
+  ul
+    p connections
+    li.lime v-for="tag_task_connection in array" {{ tag_task_connection.task_id }}

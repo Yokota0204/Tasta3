@@ -1,0 +1,507 @@
+// タグを作成するのボタン
+.create-button {
+
+  button {
+    width: 200px;
+    background-color: #FAD21F;
+    font-size: large;
+    box-shadow: 0 5px 0 0 #efcc00;
+  }
+
+  button:active {
+    box-shadow: none;
+  }
+
+}
+
+// index.html.slim
+.tag-index-content {
+
+  // background-color: #EEE;
+  padding: 100px 100px;
+
+  .low {
+    background-color: #66CC66;
+    color: #fff;
+  }
+
+  .middle {
+    background-color: #FAD21F;
+    color: #fff;
+  }
+
+  .high {
+    background-color: #FD5611;
+    color: #fff;
+  }
+
+  .no-tag-message {
+
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .no-tag-content {
+
+      h2 {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-bottom: 50px;
+      }
+
+      .create-button {
+
+        margin: auto;
+        width: 216px;
+
+        button {
+          width: 200px;
+          background-color: #FAD21F;
+          font-size: large;
+          box-shadow: 0 5px 0 0 #efcc00;
+        }
+
+        button:active {
+          box-shadow: none;
+        }
+
+      }
+
+      .error {
+        text-align: center;
+        width: 100%;
+        margin-top: 30px;
+      }
+
+    }
+
+  }
+
+  .content-top {
+
+    margin-bottom: 100px;
+
+    .content-top-message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .content-top-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .error {
+      text-align: center;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+  }
+
+  .content-bottom {
+
+    .tags {
+
+      width: 1000px;
+      margin: 0 auto;
+      box-sizing: border-box;
+
+      .tag {
+
+        display: block;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid #EEE;
+        width: 100%;
+        margin: 30px 20px;
+        box-sizing: border-box;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .5);
+        padding: 30px;
+        border-bottom: 1px solid #EEE;
+
+        .tag-top {
+
+          display: flex;
+          align-items: center;
+          border-bottom: solid 1px #EEE;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+
+          .attention {
+
+            display: flex;
+            align-items: center;
+            color: #FD4601;
+            width: 35px;
+
+            .tooltip {
+
+              position: relative;
+              cursor: pointer;
+
+              //Tooltip text container
+              &::before {
+                position: absolute;
+                top: -77px;
+                left: -80px;
+                background-color: #2B222A;
+                border-radius: 5px;
+                color: #fff;
+                content: attr(aria-label); //This pulls in the text from the element with the tooltip
+                padding: 1rem;
+                text-transform: none;
+                transition: all 0.5s ease;
+                width: 250px;
+              }
+
+              //Tooltip arrow
+              &::after {
+                position: absolute;
+                top: -22px;
+                left: 9px;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #2B222A;
+                content: " ";
+                font-size: 0;
+                line-height: 0;
+                margin-left: -5px;
+                width: 0;
+              }
+
+              //Setting up the transition
+              &::before,
+              &::after {
+                color: #efefef;
+                font-family: monospace;
+                font-size: 16px;
+                opacity: 0;
+                pointer-events: none;
+                text-align: center;
+              }
+
+              //Triggering the transition
+              &:focus::before,
+              &:focus::after,
+              &:hover::before,
+              &:hover::after {
+                opacity: 1;
+                transition: all 0.75s ease;
+              }
+
+            }
+
+            i {
+              color: #FD4601;
+              font-size: 25px;
+            }
+
+          }
+
+          .status {
+            margin-left: 15px;
+            text-align: center;
+            padding: 10px 15px;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-size: 15px;
+          }
+
+          .going {
+            background-color: #FAD21F;
+          }
+
+          .todo {
+            background-color: #66CC66;
+          }
+
+          .done {
+            background-color: #CCC;
+          }
+
+          .delete-button {
+
+            margin-left: auto;
+
+            button {
+              width: 80px;
+              background-color: #dc143c;
+              box-shadow: 0 3px 0 0 #c90129;
+            }
+
+            button:active {
+              box-shadow: none;
+            }
+
+          }
+
+        }
+
+        .tag-content {
+
+          .task-form {
+
+            border: #EEE solid 1px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+
+            .task-form-top {
+
+              margin-bottom: 20px;
+
+              .text {
+                border: none;
+                background-color: #EEE;
+                border-radius: 15px;
+                outline: none;
+                padding: 10px 20px;
+                font-size: 15px;
+                width: 100%;
+              }
+
+              .error {
+                margin-top: 10px;
+              }
+
+            }
+
+            .task-form-bottom {
+
+              display: flex;
+              justify-content: center;
+
+              .deadline-form {
+
+                margin-right: 20px;
+
+                .deadline {
+                  margin-right: 10px;
+                  padding: 10px;
+                }
+
+                .error {
+                  margin-top: 10px;
+                }
+
+              }
+
+              .priority-form {
+
+                .vs__dropdown-toggle {
+                  width: 200px;
+                }
+
+                // .select-form {
+
+                //   width: 100%;
+                //   position: relative; /* The container must be positioned relative: */
+
+                //   select {
+                //     display: none; /*hide original SELECT element: */
+                //   }
+
+                //   .select-selected {
+                //     width: 200px;
+                //     border: 1px solid #EEE;
+                //     border-radius: 10px;
+                //     padding: 10px;
+                //   }
+
+                //   /* Style the arrow inside the select element: */
+                //   .select-selected:after {
+                //     position: absolute;
+                //     content: "";
+                //     top: 18px;
+                //     right: 10px;
+                //     width: 0;
+                //     height: 0;
+                //     border: 6px solid transparent;
+                //     border-color: #888 transparent transparent transparent;
+                //   }
+
+                //   /* Point the arrow upwards when the select box is open (active): */
+                //   .select-selected.select-arrow-active:after {
+                //     border-color: transparent transparent #888 transparent;
+                //     top: 10px;
+                //   }
+
+                //   /* style the items (options), including the selected item: */
+                //   .select-items div,.select-selected {
+                //     padding: 8px 16px;
+                //     cursor: pointer;
+                //   }
+
+                //   .select-items div {
+                //     border-bottom: #EEE solid 1px;
+                //   }
+
+                //   /* Style items (options): */
+                //   .select-items {
+                //     position: absolute;
+                //     top: 100%;
+                //     left: 0;
+                //     right: 0;
+                //     z-index: 99;
+                //     background-color: #fff;
+                //     border-radius: 10px;
+                //     border: solid 1px #EEE;
+                //     div {
+                //       border-radius: 10px;
+                //     }
+                //   }
+
+                //   /* Hide the items when the select box is closed: */
+                //   .select-hide {
+                //     display: none;
+                //   }
+
+                //   .select-items div:hover, .same-as-selected {
+                //     background-color: #DDD;
+                //   }
+
+                // }
+
+              }
+
+              .task-form-button {
+
+                width: 100px;
+                margin: 0 0 0 auto;
+                display: flex;
+                align-items: flex-end;
+
+                button {
+                  background-color: #3CB371;
+                  width: 100px;
+                  height: 40px;
+                  box-shadow: 0 3px 0 0 #2CA361;
+                }
+
+                button:active {
+                  box-shadow: none;
+                }
+
+              }
+
+            }
+
+          }
+
+          .tasks {
+
+            .task {
+
+              border: 1px solid #EEE;
+              border-radius: 10px;
+              margin-bottom: 20px;
+
+              .task-content {
+
+                padding: 10px;
+
+                .task-top {
+
+                  display: flex;
+                  align-items: center;
+                  border-bottom: 1px solid #EEE;
+                  padding-bottom: 10px;
+                  margin-bottom: 10px;
+                  padding: 10px;
+
+                  .check {
+                    margin-left: 10px;
+                  }
+
+                  .task-title {
+                    margin-left: 10px;
+                  }
+
+                  .checked {
+                    text-decoration: line-through;
+                  }
+
+                  .task-priority {
+
+                    margin-left: auto;
+                    display: flex;
+                    align-items: center;
+
+                    .task-priority-mark {
+                      padding: 5px 10px;
+                      border-radius: 10px;
+                    }
+
+                  }
+
+                }
+
+                .task-bottom {
+
+                  width: 100%;
+                  margin-bottom: 10px;
+
+                  .deadline {
+                    text-align: right;
+                  }
+
+                  .tip {
+                    color: #FD4601;
+                  }
+
+                }
+
+              }
+
+              .done {
+
+                background-color: #F5F5F5;
+                opacity: 0.6;
+
+                .task-top {
+                  border-bottom: 1px solid #DDD;
+                }
+
+              }
+
+            }
+
+            .task-clear {
+
+              width: 100%;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+
+              button {
+                width: 150px;
+                background-color: #ddd;
+                box-shadow: 0 3px 0 0 #bbb;
+              }
+
+              button:active {
+                box-shadow: none;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

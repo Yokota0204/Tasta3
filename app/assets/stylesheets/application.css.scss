@@ -1,0 +1,88 @@
+/*
+ *= require_tree .
+ *= require_self
+*/
+
+@import "font-awesome";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: dimgrey;
+  font-family: "M PLUS Rounded 1c", 'Balsamiq Sans';
+}
+
+header, footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;;
+}
+
+header {
+
+  height: 150px;
+  border-bottom: 1px solid #EEE;
+  background-color: slategrey;
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 30px;
+    color: #fff;
+  }
+
+}
+
+footer {
+
+  border-top: 1px solid #EEE;
+  height: 100px;
+
+  p {
+    font-family: 'Homemade Apple', cursive;
+  }
+
+}
+
+main {
+
+  background-color: #FAFAFA;
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    padding: 10px 8px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  button.delete {
+    background-color: #dc143c;
+  }
+
+  button.cancel {
+    background-color: #DDD;
+  }
+
+  button:hover {
+    filter: brightness(90%);
+  }
+
+  button:active {
+    transform: translateY(3px);
+  }
+
+  .error {
+    color: red;
+  }
+
+}

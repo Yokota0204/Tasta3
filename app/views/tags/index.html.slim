@@ -1,0 +1,74 @@
+.content.tag-index-content#tags
+  .tags-content#create-tag v-if="tags"
+    .content-top
+      .content-top-message
+        h1.message 下のボタンからタグを追加できます。
+      .content-top-button
+        .create-button
+          button v-on:click="openTagForm" タグを作成する
+          == render partial: '/modules/modals/create_tag'
+      p.error v-if="!!errors['title']" タグのタイトルを入力してください。
+    .content-bottom
+      .tags
+        .tag v-for="(tag, i) in tags" :key="i"
+          == render partial: '/modules/modals/change_status'
+          .tag-top
+            .attention
+              span.tooltip v-if="tag.emergency==3" aria-label="締切を過ぎているタスクがあります。"
+                i.fa.fa-exclamation-circle
+              span.tooltip v-else-if="tag.emergency==2" aria-label="本日締切のタスクがあります。"
+                i.fa.fa-exclamation-circle
+              span.tooltip v-else-if="tag.emergency==1" aria-label="締切が３日以内のタスクがあります。"
+                i.fa.fa-exclamation-circle
+            .title
+              h2 v-text="tag.title"
+            .status.todo v-if="tag.status==1" v-on:click="openStatusForm(tag.id)" 未着手
+            .status.going v-else-if="tag.status==2" v-on:click="openStatusForm(tag.id)" 進行中
+            .status.done v-else-if="tag.status==0" v-on:click="openStatusForm(tag.id)" 完了
+            .delete-button v-if="tag.status==0 || tag.status==1 || tag.status==2"
+              button.delete.del-modal v-on:click="openDeleteConf(tag.id)" 削除
+            == render partial: '/modules/modals/delete_confirmation'
+          .tag-content
+            form.task-form
+              .task-form-top
+                input.text type="text" required="" name="text" placeholder="タスクを入力。" v-model="newTaskTextItems[i].text"
+                p.error v-if="tag.errors.text!=''" v-text="tag.errors.text"
+              .task-form-bottom
+                .deadline-form
+                  p 締め切り
+                  input.deadline type="date" name="deadline" required="" v-model="newTaskDeadlineItems[i].deadline"
+                  p.error v-if="tag.errors.deadline!=''" v-text="tag.errors.deadline"
+                .priority-form
+                  p 優先度
+                  v-select :options="options" v-model="newTaskPriorityItems[i].selected" label="name" :reduce="options => options.id" name="priority" placeholder="選択してください"
+                  p.error v-if="tag.errors.priority!=''" v-text="tag.errors.priority"
+                .task-form-button
+                  button type="button" v-on:click="addTask(tag.id, i)" タスクを作成
+            form.tasks
+              .task v-for="(task, j) in tag.tasks" :key="j"
+                .task-content :class="{ done: tag.tasks[j].checked }"
+                  .task-top
+                    .check
+                      input.checkbox_check type="checkbox" :value='task.id' v-model="tag.tasks[j].checked" :id="'task' + j"
+                    .task-title :class="{ checked: tag.tasks[j].checked }" v-text="task.text"
+                    .task-priority
+                      .task-priority-title 優先度：
+                      .task-priority-mark.low v-if="task.priority==1" 低
+                      .task-priority-mark.middle v-else-if="task.priority==2" 中
+                      .task-priority-mark.high v-else-if="task.priority==3" 高
+                  .task-bottom
+                    .deadline.tip v-if="task.limit<0" 締め切りを過ぎています
+                    .deadline.tip v-else-if="task.limit==0" 本日締め切り
+                    .deadline(v-else) あと{{ task.limit }}日
+              .task-clear
+                button type="button" v-on:click="clearTasks(tag.id)" タスクをクリア
+  .tags-content(v-else)
+    .no-tag-message
+      .no-tag-content
+        h2 タグがありません。タグを作成しましょう！
+        .create-button
+          button v-on:click="openTagForm" タグを作成する
+          == render partial: '/modules/modals/create_tag'
+        p.error v-if="!!errors['title']" タグのタイトルを入力してください。
+  == render partial: '/modules/modals/hello_world'
+= javascript_pack_tag 'index_vue'

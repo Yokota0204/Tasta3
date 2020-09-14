@@ -1,0 +1,14 @@
+transition name="fade"
+  section.modal.modalArea.create-modal#overlay v-show="showNewTagForm" v-on:click="closeModal"
+    .modalBg#modalBg
+    .modalWrapper v-on:click.stop=""
+      .modalContents
+        .modal-head
+          h2.title タグを作成
+        .modal-bottom
+          form#create-tag action="/tags" method="post"
+            input type="text" name="title" placeholder="タイトル" required="" v-model="newTagTitle"
+            .create-button
+              button type="button" form="create-tag" v-on:click.prevent="addTag" 作成
+            p v-if="submitting" Submitting...
+      .closeModal v-on:click="closeModal" ×

@@ -1,0 +1,12 @@
+transition name="fade"
+  section.modal.modalArea.delete-modal#overlay v-show="deleteConf" v-on:click="closeModal"
+    .modalBg#modalBg
+    .modalWrapper v-on:click.stop=""
+      .modalContents
+        .modal-head
+          h2.title 削除してもよろしいですか？
+        .modal-bottom
+          .buttons
+            button.delete v-on:click="deleteTag" 削除する
+            button.cancel v-on:click="closeModal" キャンセル
+      .closeModal v-on:click="closeModal" ×

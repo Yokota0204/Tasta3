@@ -1,0 +1,9 @@
+transition name="hello-world"
+  section.modal.first-modal#overlay v-show="firstModal"
+    .modalBg
+    .modalWrapper
+      .modalContents
+        transition name="hello-world"
+          / h1.message#overlay v-show="helloWorld" Hello, world!
+          h1.message#overlay v-show="helloWorld" Hi, Yohei! How are you?
+          / h1.message#overlay v-show="helloWorld" Tasta3

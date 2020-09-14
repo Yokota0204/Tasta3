@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title
+      | Tasta3
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    // header alphabet balsamiq sans font
+    link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet"
+    // footer alphabet homemade apple font
+    link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet"
+    // tag japanese m plus rounded 1c font
+    link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet"
+  body
+    header
+      h1 Tasta3
+    main
+      = yield
+    footer
+      p Created by Yohei Yokota

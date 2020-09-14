@@ -1,0 +1,15 @@
+transition name="fade"
+  section.modal.modalArea#overlay v-show="showStatusFrom" v-on:click="closeModal"
+    .modalBg#modalBg
+    .modalWrapper v-on:click.stop=""
+      .modalContents
+        .modal-head
+          h2.title ステータスの変更
+        .modal-bottom
+          form#todo
+            button.todo type="button" v-on:click="changeStatus(1)" 未着手
+          form#going
+            button.going type="button" form="going" v-on:click="changeStatus(2)" 進行中
+          form#done
+            button.done type="button" form="done" v-on:click="changeStatus(0)" 完了
+      .closeModal v-on:click="closeModal" ×
