@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
               status: 0,
               errors: {
                 text: '',
-                deadline: '',
+                // deadline: '',
                 priority: ''
               },
               tasks: []
@@ -100,26 +100,33 @@ document.addEventListener('DOMContentLoaded', () => {
             newTaskPush.deadline = newTaskRes.deadline;
             newTaskPush.priority = newTaskRes.priority;
             newTaskPush.text = newTaskRes.text;
-            newTaskPush.limit =  Math.ceil((parseDate(newTaskPush.deadline).getTime() - new Date().getTime())/(1000*60*60*24));
-            if (newTaskPush.limit < 0) {
-              this.tags[i].emergency = 3
-            } else if(newTaskPush.limit == 0) {
-              this.tags[i].emergency = 2
-            } else if (newTaskPush.limit <= 3) {
-              this.tags[i].emergency = 1
+            console.log(newTaskPush.deadline)
+            console.log(newTaskPush.deadline != null)
+            newTaskPush.limit = newTaskPush.deadline != null ? Math.ceil((parseDate(newTaskPush.deadline).getTime() - new Date().getTime())/(1000*60*60*24)) : '';
+            if (newTaskPush.limit != "") {
+              if (newTaskPush.limit < 0) {
+                this.tags[i].emergency = 3
+              } else if(newTaskPush.limit == 0) {
+                this.tags[i].emergency = 2
+              } else if (newTaskPush.limit <= 3) {
+                this.tags[i].emergency = 1
+              }
+            } else {
+              this.tags[i].emergency = 0;
             }
             this.tags[i].tasks.push(newTaskPush),
             this.newTaskTextItems[i].text = '',
             this.newTaskDeadlineItems[i].deadline = '',
             this.newTaskPriorityItems[i].selected = '',
             this.tags[i].errors.text = '',
-            this.tags[i].errors.deadline = '',
+            // this.tags[i].errors.deadline = '',
             this.tags[i].errors.priority = ''
-          }).catch(error => {
+          })
+          .catch(error => {
             console.log('after addTask error')
             if (error.response.data && error.response.data.errors) {
               this.tags[i].errors.text = error.response.data.errors.text ? 'タスクを入力してください。' : ''
-              this.tags[i].errors.deadline = error.response.data.errors.deadline ? '締め切りを設定してください。' : ''
+              // this.tags[i].errors.deadline = error.response.data.errors.deadline ? '締め切りを設定してください。' : ''
             }
           });
         } else {
@@ -130,11 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             this.tags[i].errors.text = '';
           }
-          if (!newTask.task.deadline) {
-            this.tags[i].errors.deadline = '締め切りを設定してください。';
-          } else {
-            this.tags[i].errors.deadline = '';
-          }
+          // if (!newTask.task.deadline) {
+          //   this.tags[i].errors.deadline = '締め切りを設定してください。';
+          // } else {
+          //   this.tags[i].errors.deadline = '';
+          // }
         }
       },
       clearTasks: function (tag_id) {
@@ -178,12 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
             var todayCount = 0;
             var deadCount = 0;
             targetTag.tasks.forEach(task => {
-              if (task.limit < 0) {
-                deadCount++;
-              } else if (task.limit == 0) {
-                todayCount++;
-              } else if (task.limit <= 3) {
-                emerCount++;
+              if (task.limit != "") {
+                if (task.limit < 0) {
+                  deadCount++;
+                } else if (task.limit == 0) {
+                  todayCount++;
+                } else if (task.limit <= 3) {
+                  emerCount++;
+                }
               }
             })
             if (deadCount > 0) {

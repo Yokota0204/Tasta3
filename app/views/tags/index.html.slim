@@ -36,8 +36,8 @@
               .task-form-bottom
                 .deadline-form
                   p 締め切り
-                  input.deadline type="date" name="deadline" required="" v-model="newTaskDeadlineItems[i].deadline"
-                  p.error v-if="tag.errors.deadline!=''" v-text="tag.errors.deadline"
+                  input.deadline type="date" name="deadline" v-model="newTaskDeadlineItems[i].deadline"
+                  / p.error v-if="tag.errors.deadline!=''" v-text="tag.errors.deadline"
                 .priority-form
                   p 優先度
                   v-select :options="options" v-model="newTaskPriorityItems[i].selected" label="name" :reduce="options => options.id" name="priority" placeholder="選択してください"
@@ -56,10 +56,12 @@
                       .task-priority-mark.low v-if="task.priority==1" 低
                       .task-priority-mark.middle v-else-if="task.priority==2" 中
                       .task-priority-mark.high v-else-if="task.priority==3" 高
-                  .task-bottom
+                  .task-bottom v-if="task.limit"
                     .deadline.tip v-if="task.limit<0" 締め切りを過ぎています
                     .deadline.tip v-else-if="task.limit==0" 本日締め切り
                     .deadline(v-else) あと{{ task.limit }}日
+                  .task-bottom(v-else)
+                    .deadline 締め切りなし
               .task-clear
                 button type="button" v-on:click="clearTasks(tag.id)" タスクをクリア
   .tags-content(v-else)

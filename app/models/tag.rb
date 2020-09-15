@@ -15,13 +15,19 @@ class Tag < ApplicationRecord
       emerCount = 0
       tag.tag_task_connections.each do |connection|
         task = tasks.find(connection.task_id).attributes
-        task["limit"] = (task["deadline"] - Date.today).to_i
-        if task["limit"] < 0
-          deadCount += 1
-        elsif task["limit"] == 0
-          todayCount += 1
-        elsif task["limit"] <= 3
-          emerCount += 1
+        if task["deadline"]
+          task["limit"] = (task["deadline"] - Date.today).to_i
+        else
+          task["limit"] = ""
+        end
+        if task["limit"] != ""
+          if task["limit"] < 0
+            deadCount += 1
+          elsif task["limit"] == 0
+            todayCount += 1
+          elsif task["limit"] <= 3
+            emerCount += 1
+          end
         end
         task["checked"] = false
         tag_hash["tasks"] << task
@@ -35,7 +41,7 @@ class Tag < ApplicationRecord
       end
       tag_hash["errors"] = {
         text: "",
-        deadline: "",
+        # deadline: "",
         priority: ""
       }
       tags_hash << tag_hash
