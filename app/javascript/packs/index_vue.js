@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(newTaskPush.deadline)
             console.log(newTaskPush.deadline != null)
             newTaskPush.limit = newTaskPush.deadline != null ? Math.ceil((parseDate(newTaskPush.deadline).getTime() - new Date().getTime())/(1000*60*60*24)) : '';
-            if (newTaskPush.limit != "") {
+            if (newTaskPush.limit != null) {
               if (newTaskPush.limit < 0) {
                 this.tags[i].emergency = 3
               } else if(newTaskPush.limit == 0) {
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             var todayCount = 0;
             var deadCount = 0;
             targetTag.tasks.forEach(task => {
-              if (task.limit != "") {
+              if (task.limit != null) {
                 if (task.limit < 0) {
                   deadCount++;
                 } else if (task.limit == 0) {

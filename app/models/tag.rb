@@ -18,9 +18,9 @@ class Tag < ApplicationRecord
         if task["deadline"]
           task["limit"] = (task["deadline"] - Date.today).to_i
         else
-          task["limit"] = ""
+          task["limit"] = nil
         end
-        if task["limit"] != ""
+        if task["limit"] != nil
           if task["limit"] < 0
             deadCount += 1
           elsif task["limit"] == 0

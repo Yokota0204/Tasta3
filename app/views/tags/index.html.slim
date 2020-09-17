@@ -56,12 +56,12 @@
                       .task-priority-mark.low v-if="task.priority==1" 低
                       .task-priority-mark.middle v-else-if="task.priority==2" 中
                       .task-priority-mark.high v-else-if="task.priority==3" 高
-                  .task-bottom v-if="task.limit"
+                  .task-bottom v-if="task.limit==null"
+                    .deadline 締め切りなし
+                  .task-bottom(v-else)
                     .deadline.tip v-if="task.limit<0" 締め切りを過ぎています
                     .deadline.tip v-else-if="task.limit==0" 本日締め切り
                     .deadline(v-else) あと{{ task.limit }}日
-                  .task-bottom(v-else)
-                    .deadline 締め切りなし
               .task-clear
                 button type="button" v-on:click="clearTasks(tag.id)" タスクをクリア
   .tags-content(v-else)
