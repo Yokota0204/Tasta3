@@ -100,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             newTaskPush.deadline = newTaskRes.deadline;
             newTaskPush.priority = newTaskRes.priority;
             newTaskPush.text = newTaskRes.text;
-            console.log(newTaskPush.deadline)
-            console.log(newTaskPush.deadline != null)
-            newTaskPush.limit = newTaskPush.deadline != null ? Math.ceil((parseDate(newTaskPush.deadline).getTime() - new Date().getTime())/(1000*60*60*24)) : '';
+            newTaskPush.limit = newTaskPush.deadline != null ? Math.ceil((parseDate(newTaskPush.deadline).getTime() - new Date().getTime())/(1000*60*60*24)) : null;
             if (newTaskPush.limit != null) {
               if (newTaskPush.limit < 0) {
                 this.tags[i].emergency = 3
