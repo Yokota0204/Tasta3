@@ -79,6 +79,7 @@ main {
 
   button:active {
     transform: translateY(3px);
+    box-shadow: none;
   }
 
   .error {
