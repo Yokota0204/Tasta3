@@ -32,6 +32,9 @@ class Tag < ApplicationRecord
         task["checked"] = false
         tag_hash["tasks"] << task
       end
+      tag_hash["tasks"] = tag_hash["tasks"].sort_by do |v|
+        [-v["priority"], v["id"]]
+      end
       if deadCount > 0 then
         tag_hash["emergency"] = 3
       elsif todayCount > 0
